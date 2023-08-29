@@ -2,14 +2,14 @@ import React from 'react';
 import classes from './Posts.module.css'
 
 type PropsType = {
-    name: string
+    message: string
     img: string
 }
 
 const Profile = (props: PropsType) => {
     return (
         <div className={classes.item}>
-            <img src={props.img} alt=""/> <div>{props.name}</div>
+            <img src={props.img} alt=""/> <div>{props.message}</div>
             <div><span>like</span></div>
         </div>
     );

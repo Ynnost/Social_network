@@ -7,10 +7,16 @@
     width: 50px;
     height: 50px;
     border-radius: 30px;
+    margin: 5px;
 }
 
 .item span {
-    width: 30px;
+    border-style: solid;
+    border-color: lavender;
+    border-width: 2px;
+    width: 10px;
     color: gold;
     border-radius: 15px;
+    padding: 2px 2px 2px 2px;
+    margin: 5px;
 }

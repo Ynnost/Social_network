@@ -13,8 +13,8 @@ const Profile = () => {
             </div>
             <div>New Post
                 <div className={classes.item}>
-                    <Posts img={'https://pixelbox.ru/wp-content/uploads/2022/08/avatar-boy-telegram-pixelbox.ru-88.jpg'} name={'Post #1'}/>
-                    <Posts img={'https://kartinkof.club/uploads/posts/2022-06/1655389713_47-kartinkof-club-p-kartinki-s-dnem-samogonshchika-47.jpg'} name={'Post #2'}/>
+                    <Posts img={'https://pixelbox.ru/wp-content/uploads/2022/08/avatar-boy-telegram-pixelbox.ru-88.jpg'} message={'Hi, how are you?'}/>
+                    <Posts img={'https://kartinkof.club/uploads/posts/2022-06/1655389713_47-kartinkof-club-p-kartinki-s-dnem-samogonshchika-47.jpg'} message={'Is`s my first post'}/>
                 </div>
             </div>
         </div>
