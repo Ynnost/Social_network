@@ -4,7 +4,7 @@ import MyPosts from "./ MyPost/MyPosts";
 
 const Profile = () => {
     return (
-        <div className={classes.content}>
+        <div>
             <div>
                 <img className={classes.img}
                      src="https://sportishka.com/uploads/posts/2022-11/1667538859_10-sportishka-com-p-avtomobil-bochka-oboi-11.jpg"

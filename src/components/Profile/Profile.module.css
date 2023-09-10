@@ -3,10 +3,10 @@
     width: 600px;
 }
 
-.content {
-    grid-area: c;
-    background-color: darkgreen;
-}
+/*.content {*/
+/*    grid-area: c;*/
+/*    background-color: darkgreen;*/
+/*}*/
 
 .item{
 
