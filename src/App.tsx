@@ -10,16 +10,19 @@ import Profile from "./components/Profile/Profile";
 // @ts-ignore
 const App = () => {
     return (
-            <div className={'app-wrapper'}>
-                <Header/>
-                <NavBar/>
-                <div className='app-wrapper-content'>
-                    <Routes>
-                    <Route path='dialogs' element={<Dialogs/>}/>
+        <div className={'app-wrapper'}>
+            <Header/>
+            <NavBar/>
+            <div className='app-wrapper-content'>
+                <Routes>
                     <Route path='profile' element={<Profile/>}/>
-                    </Routes>
-                </div>
+                    <Route path='dialogs' element={<Dialogs/>}/>
+                    <Route path='news'/>
+                    <Route path='music'/>
+                    <Route path='setting'/>
+                </Routes>
             </div>
+        </div>
     );
 }
 
