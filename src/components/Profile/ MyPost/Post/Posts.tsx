@@ -1,20 +1,20 @@
 import React from 'react';
-import classes from './Posts.module.css'
+import c from './Posts.module.css'
 
 type PropsType = {
     message: string
     img: string
-    likesCount:string
+    likesCount:number
 
 }
 
 const Profile = (props: PropsType) => {
     return (
-        <div className={classes.item}>
+        <div className={c.item}>
             <img src={props.img} alt=""/> {props.message}
-            <div>
-                <span>like</span> {props.likesCount}
-            </div>
+            <div className={c.like}><i
+                className={c.likeWo}></i> <i
+                className={c.likeWa}></i>{props.likesCount}</div>
         </div>
     );
 };

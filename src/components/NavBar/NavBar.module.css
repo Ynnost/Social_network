@@ -1,14 +1,12 @@
 .nav {
-    grid-area: n;
-    background-color: burlywood;
-    padding: 20px;
-}
+   background: #121b1f;
+    font-family: Roboto,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #666;
+    text-align: left;
+    box-sizing: border-box;
+    display: block;
 
-.item a{
-    color:white;
-    text-decoration: none;
-}
-
-.item a.activeLink {
-    color: gold;
 }

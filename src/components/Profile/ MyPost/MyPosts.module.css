@@ -2,3 +2,11 @@
 .item{
 color: aqua;
 }
+
+.postBlock{
+    padding: 10px;
+}
+
+.post{
+    margin-top: 10px;
+}

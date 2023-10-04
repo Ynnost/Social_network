@@ -1,0 +1,38 @@
+
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    font-weight: 400;
+    color: #515184;
+    line-height: 1.75;
+    font-family: Montserrat,sans-serif;
+    box-sizing: border-box;
+    outline: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.dialogsItem {
+    color: #121b1f;
+    padding: 10px 10px 4px 8px;
+    line-height: 1.75;
+    font-family: Montserrat,sans-serif;
+    box-sizing: border-box;
+    outline: 0;
+    list-style: none;
+}
+
+.dialogsItem .active{
+    color: darkslateblue;
+
+}
+
+
+.massages {
+    padding: 10px;
+}
+
+.massages .massage {
+
+}

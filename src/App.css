@@ -1,5 +1,6 @@
 .app-wrapper {
     margin: auto;
+    height: 100%;
     display: grid;
     width: 1200px;
     grid-template-areas:
@@ -12,7 +13,8 @@
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: darkgreen;
+    background-color: gainsboro;
+
 }
 
 

@@ -1,31 +1,35 @@
 import React from 'react';
-import classes from './MyPosts.module.css'
+import s from './MyPosts.module.css'
 import Posts from "./Post/Posts";
+import {PostType} from "../../../App";
 
-const Profile = () => {
+
+ type ProfileType = {
+    post:PostType[]
+}
+
+const Profile = (props:ProfileType) => {
+
     return (
 
-        <div> My post
+        <h2 className={s.postBlock}> My post
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
-                <button>Remove</button>
-            </div>
-            <div>New Post
-                <div className={classes.item}>
-                    <Posts
-                        img={'https://pixelbox.ru/wp-content/uploads/2022/08/avatar-boy-telegram-pixelbox.ru-88.jpg'}
-                        message={'Hi, how are you?'}
-                        likesCount='0'
-                    />
-                    <Posts
-                        img={'https://kartinkof.club/uploads/posts/2022-06/1655389713_47-kartinkof-club-p-kartinki-s-dnem-samogonshchika-47.jpg'}
-                           message={'Is`s my first post'}
-                        likesCount='23'
-                    />
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
+                <div>
+                    <button>Remove</button>
                 </div>
             </div>
-        </div>
+            <h3>New Post
+                <h5 className={s.post}>
+                    {props.post.map(el=><Posts message={el.message} img={el.img} likesCount={el.likesCount}/>)}
+                </h5>
+            </h3>
+        </h2>
     );
 };
 

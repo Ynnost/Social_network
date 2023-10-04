@@ -1,6 +1,16 @@
 
 .item {
-    color: aqua;
+    font-family: Montserrat,sans-serif;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    outline: 0;
+    padding: 0;
+    margin-bottom: .5rem;
+    line-height: 1.2;
+    font-size: 12px!important;
+    margin-top: .25rem!important;
+    color: #212529!important;
+    font-weight: 700!important;;
 }
 
 .item img {
@@ -19,4 +29,87 @@
     border-radius: 15px;
     padding: 2px 2px 2px 2px;
     margin: 5px;
+}
+
+.like{
+    font-family: Montserrat,sans-serif;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    padding: 0;
+    text-decoration: none;
+    outline: 0;
+    line-height: 26px;
+    font-size: 12px!important;
+    display: flex!important;
+    align-items: center!important;
+    margin-right: 1rem!important;
+    color: #212529!important;
+    font-weight: 600!important;
+}
+
+.likeWo{
+    --f7-theme-color: #132977;
+    --bs-primary: #1E74FD;
+    --bs-secondary: #673BB7;
+    --bs-success: #10d876;
+    --bs-info: #2754e6;
+    --bs-warning: #FE9431;
+    --bs-danger: #E50202;
+    --bs-light: #f7f7f7;
+    --bs-dark: #343a40;
+    --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    --theme-color: #05f;
+    --theme-color-rgb: 33,150,243;
+    --theme-color-shade: #09f;
+    --theme-color-tint: #1E74FD;
+    --bs-gutter-x: 30px;
+    --bs-gutter-y: 0;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    outline: 0;
+    padding: 0;
+    font-family: 'feather' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(135deg,var(--theme-color),var(--theme-color-shade))!important;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    display: inline-block;
+    line-height: 25px!important;
+    text-align: center;
+    font-size: 16px!important;
+    margin-right: .25rem!important;
+    color: #fff!important;
+}
+
+.likeWa{
+    word-wrap: break-word;
+    box-sizing: border-box;
+    outline: 0;
+    padding: 0;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(to right,#e44d26,#f16529)!important;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    display: inline-block;
+    line-height: 25px!important;
+    text-align: center;
+    font-size: 16px!important;
+    margin-right: .5rem!important;
+    color: #fff!important;
 }

@@ -1,17 +1,18 @@
 import React from 'react';
-import classes from './Profile.module.css'
 import MyPosts from "./ MyPost/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PostType} from "../../App";
 
-const Profile = () => {
+type ProfileType = {
+    post:PostType[]
+}
+
+const Profile = (props:ProfileType) => {
+
     return (
         <div>
-            <div>
-                <img className={classes.img}
-                     src="https://sportishka.com/uploads/posts/2022-11/1667538859_10-sportishka-com-p-avtomobil-bochka-oboi-11.jpg"
-                     alt={""}/>
-            </div>
-            <div> ava + description</div>
-            <MyPosts/>
+            <ProfileInfo/>
+            <MyPosts post={props.post}/>
         </div>
     );
 };
