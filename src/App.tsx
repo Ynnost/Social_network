@@ -8,7 +8,6 @@ import Profile from "./components/Profile/Profile";
 
 export type PostType = {
   id: string;
-  img: string;
   message: string;
   likesCount: number;
 };
@@ -34,6 +33,7 @@ export type DataType = {
       message: MessagesType[];
     };
   };
+  addPost:(message:string)=>void
 };
 
 const App = (props: DataType) => {
@@ -46,7 +46,7 @@ const App = (props: DataType) => {
           <Routes>
             <Route
               path="profile"
-              element={<Profile post={props.state.profilePage.post} />}
+              element={<Profile post={props.state.profilePage.post} addPost={props.addPost} />}
             />
             <Route
               path="dialogs/*"
