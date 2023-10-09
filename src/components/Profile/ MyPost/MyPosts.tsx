@@ -1,36 +1,46 @@
-import React from 'react';
-import s from './MyPosts.module.css'
+import React from "react";
+import s from "./MyPosts.module.css";
 import Posts from "./Post/Posts";
-import {PostType} from "../../../App";
+import { PostType } from "../../../App";
 
+type ProfileType = {
+  post: PostType[];
+};
 
- type ProfileType = {
-    post:PostType[]
-}
+const Profile = (props: ProfileType) => {
+  
+  const renderPost = () => {
+    return props.post.map((el, i) => (
+      <Posts
+        key={i}
+        message={el.message}
+        img={el.img}
+        likesCount={el.likesCount}
+      />
+    ));
+  };
 
-const Profile = (props:ProfileType) => {
+  const addPost = () => {
+ const newPost = ''
+  }
 
-    return (
-
-        <h2 className={s.postBlock}> My post
-            <div>
-                <div>
-                    <textarea></textarea>
-                </div>
-                <div>
-                    <button>Add post</button>
-                </div>
-                <div>
-                    <button>Remove</button>
-                </div>
-            </div>
-            <h3>New Post
-                <h5 className={s.post}>
-                    {props.post.map(el=><Posts message={el.message} img={el.img} likesCount={el.likesCount}/>)}
-                </h5>
-            </h3>
-        </h2>
-    );
+  return (
+    <div className={s.postBlock}>
+      {" "}
+      My post
+      <div>
+        <div>
+          <textarea></textarea>
+        </div>
+        <button onClick={()=>{}}>Add post</button>
+        <button>Remove</button>
+      </div>
+      <div>
+        New Post
+        <h5 className={s.post}>{renderPost()}</h5>
+      </div>
+    </div>
+  );
 };
 
 export default Profile;
