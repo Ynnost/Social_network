@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import s from "./MyPosts.module.css";
-import Posts from "./Post/Posts";
 import { PostType } from "../../../App";
 import { v1 } from "uuid";
+import { Post } from "./Post/Posts";
 
 type ProfileType = {
   post: PostType[];
@@ -10,21 +10,23 @@ type ProfileType = {
 };
 
 const Profile = (props: ProfileType) => {
+  
+const [newMessage, setNewMessage] = useState("");
+
   const renderPost = () => {
-    return props.post.map((el, i) => (
-      <Posts key={i} message={el.message} likesCount={el.likesCount} />
+    return props.post.map((post) => (
+      <Post key={post.id} message={post.message} likesCount={post.likesCount} />
     ));
   };
 
-  let message = "";
 
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    return (message = e.currentTarget.value);
+    setNewMessage(e.currentTarget.value);
   };
 
   const addPost = () => {
-    props.addPost(message);
-    console.log(props.post);
+    props.addPost(newMessage);
+    setNewMessage("");
   };
 
   return (
@@ -33,7 +35,7 @@ const Profile = (props: ProfileType) => {
       My post
       <div>
         <div>
-          <textarea onChange={onChangeText}></textarea>
+          <textarea value={newMessage} onChange={onChangeText}></textarea>
         </div>
         <button onClick={addPost}>Add post</button>
         <button onClick={() => {}}>Remove</button>

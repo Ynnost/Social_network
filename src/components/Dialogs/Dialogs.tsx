@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import s from "./Dialogs.module.css";
 import { DialogItem } from "./DialogItem/DialogsItem";
 import { Message } from "./Message/Message";
@@ -10,20 +10,25 @@ export type DialogsType = {
 };
 
 const Dialogs = (props: DialogsType) => {
- let text = ''
+
+const [newMessage, setNewMessage] = useState("");
+
  const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-   return text = e.currentTarget.value;
+   setNewMessage(e.currentTarget.value);
  };
 
  const addmessege = () => {
-   console.log(text);
+   console.log(newMessage);
+   setNewMessage('')
  };
 
 
   return (
     <div>
       <div>
-        <textarea onChange={onChangeText}> </textarea>
+        <textarea value={newMessage} onChange={onChangeText}>
+          {" "}
+        </textarea>
       </div>
       <button onClick={addmessege}>Add messege</button>
       <ul className={s.dialogs}>

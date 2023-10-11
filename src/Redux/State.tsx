@@ -37,7 +37,8 @@ let state = {
 
 export const addPost = (message: string) => {
   const newMessage = { id: v1(), message, likesCount: 0 };
-  return state.profilePage.post = [newMessage, ...state.profilePage.post];
+  console.log(newMessage);
+  return state.profilePage.post.push(newMessage);
 };
 
 

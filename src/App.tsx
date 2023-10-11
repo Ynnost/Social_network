@@ -2,9 +2,20 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import NavBar from "./components/NavBar/NavBar";
-import Dialogs from "./components/Dialogs/Dialogs";
+import Dialogs, { DialogsType } from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "./components/Profile/Profile";
+
+
+export type DataType = {
+  state: {
+    profilePage: {
+      post: PostType[];
+    };
+    dialogsPage: DialogsType;
+  };
+  addPost: (message: string) => void;
+};
 
 export type PostType = {
   id: string;
@@ -23,18 +34,7 @@ export type MessagesType = {
   message: string;
 };
 
-export type DataType = {
-  state: {
-    profilePage: {
-      post: PostType[];
-    };
-    dialogsPage: {
-      dialogs: DialogsItemType[];
-      message: MessagesType[];
-    };
-  };
-  addPost:(message:string)=>void
-};
+
 
 const App = (props: DataType) => {
   return (

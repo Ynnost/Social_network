@@ -6,7 +6,7 @@ type PropsType = {
   likesCount: number;
 };
 
-const Profile = (props: PropsType) => {
+export const Post = (props: PropsType) => {
   return (
     <div className={c.item}>
       <img
@@ -22,4 +22,4 @@ const Profile = (props: PropsType) => {
   );
 };
 
-export default Profile;
+
