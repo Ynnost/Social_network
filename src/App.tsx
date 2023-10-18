@@ -5,34 +5,22 @@ import NavBar from "./components/NavBar/NavBar";
 import Dialogs, { DialogsType } from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "./components/Profile/Profile";
+import { PostType } from "./Redux/State";
 
 
 export type DataType = {
   state: {
     profilePage: {
+      newPostText: string;
       post: PostType[];
     };
     dialogsPage: DialogsType;
   };
   addPost: (message: string) => void;
+  updateNewPostText:(newPostText:string)=>void
 };
 
-export type PostType = {
-  id: string;
-  message: string;
-  likesCount: number;
-};
 
-export type DialogsItemType = {
-  id: string;
-  name: string;
-  to: string;
-};
-
-export type MessagesType = {
-  id: string;
-  message: string;
-};
 
 
 
@@ -46,7 +34,7 @@ const App = (props: DataType) => {
           <Routes>
             <Route
               path="profile"
-              element={<Profile post={props.state.profilePage.post} addPost={props.addPost} />}
+              element={<Profile post={props.state.profilePage.post} addPost={props.addPost} newPostText={props.state.profilePage.newPostText} updateNewPost={props.updateNewPostText} />}
             />
             <Route
               path="dialogs/*"

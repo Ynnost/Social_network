@@ -1,7 +1,41 @@
 import { v1 } from "uuid";
+import { DialogsType } from "../components/Dialogs/Dialogs";
+
+let rernderEntireTree = () =>{
+  console.log('Render')
+}
+
+
+
+export type StateType = {
+    profilePage: {
+      newPostText: string;
+      post: PostType[];
+    };
+    dialogsPage: DialogsType;
+  };
+
+export type PostType = {
+  id: string;
+  message: string;
+  likesCount: number;
+};
+
+export type DialogsItemType = {
+  id: string;
+  name: string;
+  to: string;
+};
+
+export type MessagesType = {
+  id: string;
+  message: string;
+};
+
 
 let state = {
   profilePage: {
+    newPostText:'IT KAMASUTRA',
     post: [
       {
         id: v1(),
@@ -34,13 +68,24 @@ let state = {
   },
 };
 
+// window.state = state
+
 
 export const addPost = (message: string) => {
   const newMessage = { id: v1(), message, likesCount: 0 };
   console.log(newMessage);
-  return state.profilePage.post.push(newMessage);
+  state.profilePage.post.push(newMessage);
+  rernderEntireTree()
 };
 
+export const updateNewPostText = (newText:string)=>{
+  state.profilePage.newPostText = newText
+  rernderEntireTree();
+}
+
+export const subscribe=(observer:()=>void)=>{
+  rernderEntireTree = observer; // observer
+}
 
 
 export default state;

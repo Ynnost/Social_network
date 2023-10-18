@@ -1,17 +1,19 @@
 import React, { ChangeEvent, useState } from "react";
 import s from "./MyPosts.module.css";
-import { PostType } from "../../../App";
 import { v1 } from "uuid";
 import { Post } from "./Post/Posts";
+import { PostType } from "../../../Redux/State";
 
 type ProfileType = {
   post: PostType[];
+  newPostText: string;
   addPost: (message: string) => void;
+  updateNewPost: (newPostText: string) => void;
 };
 
 const Profile = (props: ProfileType) => {
   
-const [newMessage, setNewMessage] = useState("");
+const [newMessage, setNewMessage] = useState(props.newPostText);
 
   const renderPost = () => {
     return props.post.map((post) => (
@@ -21,6 +23,7 @@ const [newMessage, setNewMessage] = useState("");
 
 
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    props.updateNewPost(e.currentTarget.value);
     setNewMessage(e.currentTarget.value);
   };
 
@@ -29,16 +32,23 @@ const [newMessage, setNewMessage] = useState("");
     setNewMessage("");
   };
 
+
+
+
+
   return (
     <div className={s.postBlock}>
       {" "}
       My post
       <div>
         <div>
-          <textarea value={newMessage} onChange={onChangeText}></textarea>
+          <textarea
+            value={props.newPostText}
+            onChange={onChangeText}
+          ></textarea>
         </div>
         <button onClick={addPost}>Add post</button>
-        <button onClick={() => {}}>Remove</button>
+        <button onClick={()=>{}}>Remove</button>
       </div>
       <div>
         New Post
