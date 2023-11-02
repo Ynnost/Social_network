@@ -2,36 +2,34 @@ import React, { ChangeEvent, useState } from "react";
 import s from "./Dialogs.module.css";
 import { DialogItem } from "./DialogItem/DialogsItem";
 import { Message } from "./Message/Message";
-import { DialogsItemType, MessagesType } from "../../Redux/State";
+import {
+  DialogsItemType,
+  DispatchActionType,
+  MessagesType,
+  updateNewMessageBodyActionCreator,
+} from "../../Redux/State";
 
-
-export type DialogsType = {
+export type DialogType = {
   dialogs: DialogsItemType[];
   message: MessagesType[];
+  newMessageBoody: string;
+  dispatch: (action: DispatchActionType) => void;
 };
 
-const Dialogs = (props: DialogsType) => {
+const Dialogs = (props: DialogType) => {
+  const [newMessage, setNewMessage] = useState(props.newMessageBoody);
 
-const [newMessage, setNewMessage] = useState("");
+  const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setNewMessage(e.currentTarget.value);
+  };
 
- const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-   setNewMessage(e.currentTarget.value);
- };
-
- const addmessege = () => {
-   console.log(newMessage);
-   setNewMessage('')
- };
-
+  const addmessege = () => {
+    props.dispatch(updateNewMessageBodyActionCreator(newMessage));
+    setNewMessage("");
+  };
 
   return (
     <div>
-      <div>
-        <textarea value={newMessage} onChange={onChangeText}>
-          {" "}
-        </textarea>
-      </div>
-      <button onClick={addmessege}>Add messege</button>
       <ul className={s.dialogs}>
         <div className={s.dialogsItem}>
           {props.dialogs.map((el, i) => (
@@ -42,6 +40,16 @@ const [newMessage, setNewMessage] = useState("");
           {props.message.map((el, i) => (
             <Message key={i} id={el.id} message={el.message} />
           ))}
+          <div>
+            <textarea
+              value={newMessage}
+              placeholder="Enter your message"
+              onChange={onChangeText}
+            >
+              {" "}
+            </textarea>
+          </div>
+          <button onClick={addmessege}>Add messege</button>
         </div>
       </ul>
     </div>

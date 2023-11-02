@@ -1,19 +1,27 @@
 import { v1 } from "uuid";
-import { DialogsType } from "../components/Dialogs/Dialogs";
-
-let rernderEntireTree = () =>{
-  console.log('Render')
-}
 
 
+export type StoreType = {
+  _state: StateType;
+  subscribe: (observer: () => void) => void;
+  _rernderEntireTree: () => void;
+  getState: () => StateType;
+  dispatch: (action: DispatchActionType) => void;
+};
 
 export type StateType = {
-    profilePage: {
-      newPostText: string;
-      post: PostType[];
-    };
-    dialogsPage: DialogsType;
+  profilePage: {
+    newPostText: string;
+    post: PostType[];
   };
+  dialogsPage: DialogsType;
+};
+
+export type DialogsType = {
+  dialogs: DialogsItemType[];
+  message: MessagesType[];
+  newMessageBoody:string;
+};
 
 export type PostType = {
   id: string;
@@ -32,60 +40,119 @@ export type MessagesType = {
   message: string;
 };
 
+export type DispatchActionType =
+  | AddPostActionCreator
+  | UpdateNewPostActionCreator
+  | UpdateNewMessageBodyActionCreator;
 
-let state = {
-  profilePage: {
-    newPostText:'IT KAMASUTRA',
-    post: [
-      {
-        id: v1(),
-        message: "Hi, how are you?",
-        likesCount: 12,
-      },
-      {
-        id: v1(),
-        message: "Is`s my first post",
-        likesCount: 11,
-      },
-    ],
-  },
-
-  dialogsPage: {
-    dialogs: [
-      { id: v1(), name: "Denis Yunin", to: "/dialogs/1" },
-      { id: v1(), name: "Pavel Aladkin", to: "/dialogs/2" },
-      { id: v1(), name: "Micha Koldune", to: "/dialogs/3" },
-      { id: v1(), name: "Maria Shah", to: "/dialogs/4" },
-      { id: v1(), name: "Irisha Yunina", to: "/dialogs/5" },
-    ],
-    message: [
-      { id: v1(), message: "Hi" },
-      { id: v1(), message: "How are you?" },
-      { id: v1(), message: "Yo" },
-      { id: v1(), message: "Yo" },
-      { id: v1(), message: "What?" },
-    ],
-  },
+type AddPostActionCreator = {
+  type: "ADD-POST";
+  message:string
 };
 
-// window.state = state
-
-
-export const addPost = (message: string) => {
-  const newMessage = { id: v1(), message, likesCount: 0 };
-  console.log(newMessage);
-  state.profilePage.post.push(newMessage);
-  rernderEntireTree()
+type UpdateNewPostActionCreator = {
+  type: "UPDATE-NEW-POST-TEXT";
+  newText: string;
 };
 
-export const updateNewPostText = (newText:string)=>{
-  state.profilePage.newPostText = newText
-  rernderEntireTree();
-}
-
-export const subscribe=(observer:()=>void)=>{
-  rernderEntireTree = observer; // observer
-}
+type UpdateNewMessageBodyActionCreator = {
+  type: "UPDATE-NEW-MESSAGE-BODY";
+  newTextBody: string;
+};
 
 
-export default state;
+
+
+export let addPostActionCreator = (message: string): AddPostActionCreator => {
+  return {
+    type: "ADD-POST",
+    message: message,
+  };
+};
+
+export let updateNewPostActionCreator = (
+  newText: string
+): UpdateNewPostActionCreator => {
+  return {
+    type: "UPDATE-NEW-POST-TEXT",
+    newText
+  };
+};
+
+export let updateNewMessageBodyActionCreator = (
+  newTextBody: string
+): UpdateNewMessageBodyActionCreator => {
+  return {
+    type: "UPDATE-NEW-MESSAGE-BODY",
+    newTextBody,
+  };
+};
+
+
+
+
+export const store: StoreType = {
+  _state: {
+    profilePage: {
+      newPostText: "IT KAMASUTRA",
+      post: [
+        {
+          id: v1(),
+          message: "Hi, how are you?",
+          likesCount: 12,
+        },
+        {
+          id: v1(),
+          message: "Is`s my first post",
+          likesCount: 11,
+        },
+      ],
+    },
+
+    dialogsPage: {
+      dialogs: [
+        { id: v1(), name: "Denis Yunin", to: "/dialogs/1" },
+        { id: v1(), name: "Pavel Aladkin", to: "/dialogs/2" },
+        { id: v1(), name: "Micha Koldune", to: "/dialogs/3" },
+        { id: v1(), name: "Maria Shah", to: "/dialogs/4" },
+        { id: v1(), name: "Irisha Yunina", to: "/dialogs/5" },
+      ],
+      message: [
+        { id: v1(), message: "Hi" },
+        { id: v1(), message: "How are you?" },
+        { id: v1(), message: "Yo" },
+        { id: v1(), message: "Yo" },
+        { id: v1(), message: "What?" },
+      ],
+      newMessageBoody:'',
+    },
+  },
+  _rernderEntireTree() {
+    console.log("state changed");
+  },
+  subscribe(observer: () => void) {
+    this._rernderEntireTree = observer; // observer
+  },
+  getState(){
+    return this._state
+  },
+  dispatch(action){
+    if(action.type === 'ADD-POST'){
+       const newMessage = { id: v1(), message:action.message, likesCount: 0 };
+       console.log(newMessage);
+       this._state.profilePage.post.push(newMessage);
+       this._rernderEntireTree();
+    }
+    if(action.type === 'UPDATE-NEW-POST-TEXT'){
+      this._state.profilePage.newPostText = action.newText;
+      this._rernderEntireTree();
+    };
+    if(action.type === 'UPDATE-NEW-MESSAGE-BODY'){
+      this._state.dialogsPage.newMessageBoody = action.newTextBody;
+      this._state.dialogsPage.message.push({ id: v1(), message: action.newTextBody});
+      this._state.dialogsPage.newMessageBoody = ''
+      this._rernderEntireTree();
+    }
+
+  }
+};

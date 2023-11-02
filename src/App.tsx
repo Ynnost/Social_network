@@ -2,29 +2,20 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import NavBar from "./components/NavBar/NavBar";
-import Dialogs, { DialogsType } from "./components/Dialogs/Dialogs";
+import Dialogs from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "./components/Profile/Profile";
-import { PostType } from "./Redux/State";
+import { StoreType } from "./Redux/State";
 
 
-export type DataType = {
-  state: {
-    profilePage: {
-      newPostText: string;
-      post: PostType[];
-    };
-    dialogsPage: DialogsType;
-  };
-  addPost: (message: string) => void;
-  updateNewPostText:(newPostText:string)=>void
+export type PropsType = {
+ store:StoreType
 };
 
+const App:React.FC<PropsType> = (props) => {
 
+const store = props.store.getState()
 
-
-
-const App = (props: DataType) => {
   return (
     <BrowserRouter>
       <div className={"app-wrapper"}>
@@ -34,14 +25,22 @@ const App = (props: DataType) => {
           <Routes>
             <Route
               path="profile"
-              element={<Profile post={props.state.profilePage.post} addPost={props.addPost} newPostText={props.state.profilePage.newPostText} updateNewPost={props.updateNewPostText} />}
+              element={
+                <Profile
+                  post={store.profilePage.post}
+                  dispatch={props.store.dispatch.bind(props.store)}
+                  newPostText={store.profilePage.newPostText}
+                />
+              }
             />
             <Route
               path="dialogs/*"
               element={
                 <Dialogs
-                  dialogs={props.state.dialogsPage.dialogs}
-                  message={props.state.dialogsPage.message}
+                  dialogs={store.dialogsPage.dialogs}
+                  message={store.dialogsPage.message}
+                  newMessageBoody={store.dialogsPage.newMessageBoody}
+                  dispatch={props.store.dispatch.bind(props.store)}
                 />
               }
             />

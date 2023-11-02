@@ -2,18 +2,19 @@ import React, { ChangeEvent, useState } from "react";
 import s from "./MyPosts.module.css";
 import { v1 } from "uuid";
 import { Post } from "./Post/Posts";
-import { PostType } from "../../../Redux/State";
+import { DispatchActionType, PostType, addPostActionCreator, updateNewPostActionCreator } from "../../../Redux/State";
 
 type ProfileType = {
   post: PostType[];
   newPostText: string;
-  addPost: (message: string) => void;
-  updateNewPost: (newPostText: string) => void;
+  dispatch: (action: DispatchActionType) => void;
 };
 
+
+
+
 const Profile = (props: ProfileType) => {
-  
-const [newMessage, setNewMessage] = useState(props.newPostText);
+  const [newMessage, setNewMessage] = useState(props.newPostText);
 
   const renderPost = () => {
     return props.post.map((post) => (
@@ -21,20 +22,15 @@ const [newMessage, setNewMessage] = useState(props.newPostText);
     ));
   };
 
-
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.updateNewPost(e.currentTarget.value);
+    props.dispatch(updateNewPostActionCreator(e.currentTarget.value));
     setNewMessage(e.currentTarget.value);
   };
 
   const addPost = () => {
-    props.addPost(newMessage);
+    props.dispatch(addPostActionCreator(newMessage));
     setNewMessage("");
   };
-
-
-
-
 
   return (
     <div className={s.postBlock}>
@@ -48,7 +44,7 @@ const [newMessage, setNewMessage] = useState(props.newPostText);
           ></textarea>
         </div>
         <button onClick={addPost}>Add post</button>
-        <button onClick={()=>{}}>Remove</button>
+        <button onClick={() => {}}>Remove</button>
       </div>
       <div>
         New Post
