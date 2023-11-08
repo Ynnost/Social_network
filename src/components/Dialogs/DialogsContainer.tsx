@@ -1,29 +1,19 @@
-import {
-  DispatchActionType,
-  StoreType,
-  store,
-} from "../../Redux/store";
+import { store } from "../../Redux/store";
 import {
   sendNewMessageBodyActionCreator,
   updateNewMessageBodyActionCreator,
 } from "../../Redux/DialogsReducer";
 import Dialogs from "./Dialogs";
+import { PropsStateType } from "../../App";
 
-
-export type DialogConteinerType = {
-  store: StoreType;
-  dispatch: (action: DispatchActionType) => void;
-};
-
-const DialogsConteiner = (props: DialogConteinerType) => {
-
-  let dialog = store.getState().dialogsPage
+const DialogsConteiner = (props: PropsStateType) => {
+  let dialog = store.getState().dialogsPage;
   const onChangeText = (newMessageBoody: string) => {
-    props.dispatch(updateNewMessageBodyActionCreator(newMessageBoody));
+    props.store.dispatch(updateNewMessageBodyActionCreator(newMessageBoody));
   };
 
   const addMessage = () => {
-    props.dispatch(sendNewMessageBodyActionCreator());
+    props.store.dispatch(sendNewMessageBodyActionCreator());
   };
 
   return (
