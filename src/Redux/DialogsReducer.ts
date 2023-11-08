@@ -1,5 +1,5 @@
 import { v1 } from "uuid";
-import { DialogsType, DispatchActionType } from "./State";
+import { DialogsType, DispatchActionType } from "./store";
 
 export type UpdateNewMessageBodyActionCreator = {
   type: "UPDATE-NEW-MESSAGE-BODY";
@@ -26,7 +26,9 @@ export const dialogsReducer = (
       const data = [...state.message, body];
       state.newMessageBoody = "";
       return {
-        ...state, message:data};
+        ...state,
+        message: data,
+      };
     }
 
     default:

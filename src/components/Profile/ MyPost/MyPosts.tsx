@@ -2,32 +2,34 @@ import React, { ChangeEvent, useState } from "react";
 import s from "./MyPosts.module.css";
 import { v1 } from "uuid";
 import { Post } from "./Post/Posts";
-import { DispatchActionType, PostType } from "../../../Redux/State";
-import { addPostActionCreator, updateNewPostActionCreator } from "../../../Redux/ProfileReducer";
+import { DispatchActionType, PostType } from "../../../Redux/store";
+import {
+  addPostActionCreator,
+  updateNewPostActionCreator,
+} from "../../../Redux/ProfileReducer";
 
-type ProfileType = {
+export type ProfileType = {
   post: PostType[];
   newPostText: string;
-  dispatch: (action: DispatchActionType) => void;
+  updateNewPost:(text:string)=>void
+  addPost:()=>void
 };
 
-
-const Profile = (props: ProfileType) => {
-
+const MyPosts = (props: ProfileType) => {
   const renderPost = () => {
     return props.post.map((post) => (
       <Post key={post.id} message={post.message} likesCount={post.likesCount} />
     ));
   };
 
-  console.log(props.post)
+  console.log(props.post);
 
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(updateNewPostActionCreator(e.currentTarget.value));
+    props.updateNewPost(e.currentTarget.value);
   };
 
   const addPost = () => {
-    props.dispatch(addPostActionCreator());
+    props.addPost();
   };
 
   return (
@@ -52,4 +54,4 @@ const Profile = (props: ProfileType) => {
   );
 };
 
-export default Profile;
+export default MyPosts;

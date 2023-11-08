@@ -1,9 +1,6 @@
-import s from './../Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-import { DialogsItemType } from '../../../Redux/State';
-
-
-
+import s from "./../Dialogs.module.css";
+import { NavLink } from "react-router-dom";
+import { DialogsItemType } from "../../../Redux/store";
 
 export const DialogItem = (props: DialogsItemType) => {
   return (
@@ -18,5 +15,3 @@ export const DialogItem = (props: DialogsItemType) => {
     </li>
   );
 };
-
-

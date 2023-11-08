@@ -1,5 +1,5 @@
 import { v1 } from "uuid";
-import { DispatchActionType, ProfileType } from "./State";
+import { DispatchActionType, ProfileType } from "./store";
 
 export type AddPostActionCreator = {
   type: "ADD-POST";
@@ -17,8 +17,8 @@ export const profileReducer = (
   switch (action.type) {
     case "ADD-POST": {
       const newPost = { id: v1(), message: state.newPostText, likesCount: 0 };
-      const data = [...state.post, newPost]
-      return {...state, post:data};
+      const data = [...state.post, newPost];
+      return { ...state, post: data };
     }
     case "UPDATE-NEW-POST-TEXT": {
       console.log(action.newText);

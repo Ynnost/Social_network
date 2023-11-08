@@ -5,16 +5,14 @@ import NavBar from "./components/NavBar/NavBar";
 import Dialogs from "./components/Dialogs/Dialogs";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Profile from "./components/Profile/Profile";
-import { StoreType } from "./Redux/State";
-
+import { StoreType } from "./Redux/store";
+import DialogsConteiner from "./components/Dialogs/DialogsContainer";
 
 export type PropsType = {
- store:StoreType
+  store: StoreType;
 };
 
-const App:React.FC<PropsType> = (props) => {
-
-const store = props.store.getState()
+const App: React.FC<PropsType> = (props) => {
 
   return (
     <BrowserRouter>
@@ -27,19 +25,16 @@ const store = props.store.getState()
               path="profile"
               element={
                 <Profile
-                  post={store.profilePage.post}
+                  store={props.store}
                   dispatch={props.store.dispatch.bind(props.store)}
-                  newPostText={store.profilePage.newPostText}
                 />
               }
             />
             <Route
               path="dialogs/*"
               element={
-                <Dialogs
-                  dialogs={store.dialogsPage.dialogs}
-                  message={store.dialogsPage.message}
-                  newMessageBoody={store.dialogsPage.newMessageBoody}
+                <DialogsConteiner
+                  store={props.store}
                   dispatch={props.store.dispatch.bind(props.store)}
                 />
               }

@@ -1,35 +1,26 @@
-import  { ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import s from "./Dialogs.module.css";
 import { DialogItem } from "./DialogItem/DialogsItem";
-import {
-  DialogsItemType,
-  DispatchActionType,
-  MessagesType,
-} from "../../Redux/State";
-import { sendNewMessageBodyActionCreator, updateNewMessageBodyActionCreator } from "../../Redux/DialogsReducer";
+import { DialogsItemType, MessagesType } from "../../Redux/store";
 import { Message } from "./Message/Message";
 
 export type DialogType = {
   dialogs: DialogsItemType[];
   message: MessagesType[];
   newMessageBoody: string;
-  dispatch: (action: DispatchActionType) => void;
+  updateNewMessageBody: (newMessageBoody: string) => void;
+  sendNewMessageBody: () => void;
 };
 
 const Dialogs = (props: DialogType) => {
-
+  
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    props.dispatch(updateNewMessageBodyActionCreator(e.currentTarget.value));
-    console.log(e.currentTarget.value);
+    props.updateNewMessageBody(e.currentTarget.value);
   };
 
   const addMessage = () => {
-    props.dispatch(sendNewMessageBodyActionCreator());
-    console.log(props.message);
-    console.log(props.dialogs);
+    props.sendNewMessageBody();
   };
-
-
 
   return (
     <div>
