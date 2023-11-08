@@ -1,4 +1,3 @@
-import React from "react";
 import MyPosts from "./ MyPost/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { DispatchActionType, PostType } from "../../Redux/State";

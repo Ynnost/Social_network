@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useState } from "react";
+import  { ChangeEvent } from "react";
 import s from "./Dialogs.module.css";
 import { DialogItem } from "./DialogItem/DialogsItem";
-import { Message } from "./Message/Message";
 import {
   DialogsItemType,
   DispatchActionType,
   MessagesType,
-  updateNewMessageBodyActionCreator,
 } from "../../Redux/State";
+import { sendNewMessageBodyActionCreator, updateNewMessageBodyActionCreator } from "../../Redux/DialogsReducer";
+import { Message } from "./Message/Message";
 
 export type DialogType = {
   dialogs: DialogsItemType[];
@@ -17,16 +17,19 @@ export type DialogType = {
 };
 
 const Dialogs = (props: DialogType) => {
-  const [newMessage, setNewMessage] = useState(props.newMessageBoody);
 
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewMessage(e.currentTarget.value);
+    props.dispatch(updateNewMessageBodyActionCreator(e.currentTarget.value));
+    console.log(e.currentTarget.value);
   };
 
-  const addmessege = () => {
-    props.dispatch(updateNewMessageBodyActionCreator(newMessage));
-    setNewMessage("");
+  const addMessage = () => {
+    props.dispatch(sendNewMessageBodyActionCreator());
+    console.log(props.message);
+    console.log(props.dialogs);
   };
+
+
 
   return (
     <div>
@@ -42,14 +45,14 @@ const Dialogs = (props: DialogType) => {
           ))}
           <div>
             <textarea
-              value={newMessage}
+              value={props.newMessageBoody}
               placeholder="Enter your message"
               onChange={onChangeText}
             >
               {" "}
             </textarea>
           </div>
-          <button onClick={addmessege}>Add messege</button>
+          <button onClick={addMessage}>Add messege</button>
         </div>
       </ul>
     </div>

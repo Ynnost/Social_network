@@ -1,4 +1,7 @@
 import { v1 } from "uuid";
+import { AddPostActionCreator, UpdateNewPostActionCreator, profileReducer } from "./ProfileReducer";
+import { SendNewMessageBodyActionCreator, UpdateNewMessageBodyActionCreator, dialogsReducer } from "./DialogsReducer";
+
 
 
 export type StoreType = {
@@ -10,12 +13,15 @@ export type StoreType = {
 };
 
 export type StateType = {
-  profilePage: {
-    newPostText: string;
-    post: PostType[];
-  };
+  profilePage: ProfileType;
   dialogsPage: DialogsType;
 };
+
+export type ProfileType = {
+  post: PostType[];
+  newPostText: string;
+};
+
 
 export type DialogsType = {
   dialogs: DialogsItemType[];
@@ -41,55 +47,10 @@ export type MessagesType = {
 };
 
 export type DispatchActionType =
+  | UpdateNewMessageBodyActionCreator
+  | SendNewMessageBodyActionCreator
   | AddPostActionCreator
-  | UpdateNewPostActionCreator
-  | UpdateNewMessageBodyActionCreator;
-
-type AddPostActionCreator = {
-  type: "ADD-POST";
-  message:string
-};
-
-type UpdateNewPostActionCreator = {
-  type: "UPDATE-NEW-POST-TEXT";
-  newText: string;
-};
-
-type UpdateNewMessageBodyActionCreator = {
-  type: "UPDATE-NEW-MESSAGE-BODY";
-  newTextBody: string;
-};
-
-
-
-
-export let addPostActionCreator = (message: string): AddPostActionCreator => {
-  return {
-    type: "ADD-POST",
-    message: message,
-  };
-};
-
-export let updateNewPostActionCreator = (
-  newText: string
-): UpdateNewPostActionCreator => {
-  return {
-    type: "UPDATE-NEW-POST-TEXT",
-    newText
-  };
-};
-
-export let updateNewMessageBodyActionCreator = (
-  newTextBody: string
-): UpdateNewMessageBodyActionCreator => {
-  return {
-    type: "UPDATE-NEW-MESSAGE-BODY",
-    newTextBody,
-  };
-};
-
-
-
+  | UpdateNewPostActionCreator;
 
 export const store: StoreType = {
   _state: {
@@ -137,22 +98,10 @@ export const store: StoreType = {
     return this._state
   },
   dispatch(action){
-    if(action.type === 'ADD-POST'){
-       const newMessage = { id: v1(), message:action.message, likesCount: 0 };
-       console.log(newMessage);
-       this._state.profilePage.post.push(newMessage);
-       this._rernderEntireTree();
-    }
-    if(action.type === 'UPDATE-NEW-POST-TEXT'){
-      this._state.profilePage.newPostText = action.newText;
-      this._rernderEntireTree();
-    };
-    if(action.type === 'UPDATE-NEW-MESSAGE-BODY'){
-      this._state.dialogsPage.newMessageBoody = action.newTextBody;
-      this._state.dialogsPage.message.push({ id: v1(), message: action.newTextBody});
-      this._state.dialogsPage.newMessageBoody = ''
-      this._rernderEntireTree();
-    }
 
+    this._state.profilePage = profileReducer(this._state.profilePage, action) as ProfileType;
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action) as DialogsType;
+
+   this._rernderEntireTree();
   }
 };

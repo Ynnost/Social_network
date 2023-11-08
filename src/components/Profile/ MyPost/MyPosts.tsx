@@ -2,7 +2,8 @@ import React, { ChangeEvent, useState } from "react";
 import s from "./MyPosts.module.css";
 import { v1 } from "uuid";
 import { Post } from "./Post/Posts";
-import { DispatchActionType, PostType, addPostActionCreator, updateNewPostActionCreator } from "../../../Redux/State";
+import { DispatchActionType, PostType } from "../../../Redux/State";
+import { addPostActionCreator, updateNewPostActionCreator } from "../../../Redux/ProfileReducer";
 
 type ProfileType = {
   post: PostType[];
@@ -11,10 +12,7 @@ type ProfileType = {
 };
 
 
-
-
 const Profile = (props: ProfileType) => {
-  const [newMessage, setNewMessage] = useState(props.newPostText);
 
   const renderPost = () => {
     return props.post.map((post) => (
@@ -22,14 +20,14 @@ const Profile = (props: ProfileType) => {
     ));
   };
 
+  console.log(props.post)
+
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     props.dispatch(updateNewPostActionCreator(e.currentTarget.value));
-    setNewMessage(e.currentTarget.value);
   };
 
   const addPost = () => {
-    props.dispatch(addPostActionCreator(newMessage));
-    setNewMessage("");
+    props.dispatch(addPostActionCreator());
   };
 
   return (
