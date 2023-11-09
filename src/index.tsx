@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./Redux/store";
+import { BrowserRouter } from "react-router-dom";
+import StoreContext from "./storeContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,7 +14,11 @@ const root = ReactDOM.createRoot(
 let rernderEntireTree = () => {
   root.render(
     <React.StrictMode>
-      <App store={store} />
+      <BrowserRouter>
+        <StoreContext.Provider value={store}>
+          <App store={store} />
+        </StoreContext.Provider>
+      </BrowserRouter>
     </React.StrictMode>
   );
 };

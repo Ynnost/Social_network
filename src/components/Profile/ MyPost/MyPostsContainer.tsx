@@ -1,29 +1,44 @@
-import { ChangeEvent } from "react";
 import {
   addPostActionCreator,
   updateNewPostActionCreator,
 } from "../../../Redux/ProfileReducer";
 import MyPosts from "./MyPosts";
-import { PropsStateType } from "../../../App";
+import StoreContext from "../../../storeContext";
 
+const MyPostsContainer = () => {
+  // let store = props.store.getState().profilePage;
 
-const MyPostsContainer = (props: PropsStateType) => {
-  let store = props.store.getState().profilePage;
-  const onChangeText = (text: string) => {
-    props.store.dispatch(updateNewPostActionCreator(text));
-  };
+  // const onChangeText = (text: string) => {
+  //   props.store.dispatch(updateNewPostActionCreator(text));
+  // };
 
-  const addPost = () => {
-    props.store.dispatch(addPostActionCreator());
-  };
+  // const addPost = () => {
+  //   props.store.dispatch(addPostActionCreator());
+  // };
 
   return (
-    <MyPosts
-      updateNewPost={onChangeText}
-      addPost={addPost}
-      post={store.post}
-      newPostText={store.newPostText}
-    />
+    <StoreContext.Consumer>
+      {(store) => {
+        let state = store.getState().profilePage;
+
+        const onChangeText = (text: string) => {
+          store.dispatch(updateNewPostActionCreator(text));
+        };
+
+        const addPost = () => {
+          store.dispatch(addPostActionCreator());
+        };
+
+        return (
+          <MyPosts
+            updateNewPost={onChangeText}
+            addPost={addPost}
+            post={state.post}
+            newPostText={state.newPostText}
+          />
+        );
+      }}
+    </StoreContext.Consumer>
   );
 };
 
