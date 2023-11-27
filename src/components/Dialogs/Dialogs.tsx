@@ -3,6 +3,7 @@ import s from "./Dialogs.module.css";
 import { DialogItem } from "./DialogItem/DialogsItem";
 import { DialogsItemType, MessagesType } from "../../Redux/store";
 import { Message } from "./Message/Message";
+import { DialogsPagePropsType } from "./DialogsConteiner";
 
 export type DialogType = {
   dialogs: DialogsItemType[];
@@ -12,8 +13,7 @@ export type DialogType = {
   sendNewMessageBody: () => void;
 };
 
-const Dialogs = (props: DialogType) => {
-  
+const Dialogs = (props: DialogsPagePropsType) => {
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     props.updateNewMessageBody(e.currentTarget.value);
   };
@@ -26,20 +26,16 @@ const Dialogs = (props: DialogType) => {
     <div>
       <ul className={s.dialogs}>
         <div className={s.dialogsItem}>
-          {props.dialogs.map((el, i) => (
+          {props.dialogsPage.dialogs.map((el, i) => (
             <DialogItem key={i} to={el.to} name={el.name} id={el.id} />
           ))}
         </div>
         <div className={s.massages}>
-          {props.message.map((el, i) => (
+          {props.dialogsPage.message.map((el, i) => (
             <Message key={i} id={el.id} message={el.message} />
           ))}
           <div>
-            <textarea
-              value={props.newMessageBoody}
-              placeholder="Enter your message"
-              onChange={onChangeText}
-            >
+            <textarea value={props.dialogsPage.newMessageBoody} placeholder="Enter your message" onChange={onChangeText}>
               {" "}
             </textarea>
           </div>

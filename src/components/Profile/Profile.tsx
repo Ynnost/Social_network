@@ -1,12 +1,11 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import MyPostsContainer from "./ MyPost/MyPostsContainer";
-
+import SuperMyPostsContainer from "./ MyPost/MyPostsContainer";
 
 const Profile = () => {
   return (
     <div>
       <ProfileInfo />
-      <MyPostsContainer />
+      <SuperMyPostsContainer />
     </div>
   );
 };

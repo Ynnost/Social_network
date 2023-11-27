@@ -1,45 +1,40 @@
-import {
-  addPostActionCreator,
-  updateNewPostActionCreator,
-} from "../../../Redux/ProfileReducer";
+import { addPostActionCreator, updateNewPostActionCreator } from "../../../Redux/ProfileReducer";
 import MyPosts from "./MyPosts";
-import StoreContext from "../../../storeContext";
+import { ProfileType } from "../../../Redux/store";
+import { connect } from "react-redux";
+import { AppRootStateType } from "../../../Redux/reduxStore";
+import { Dispatch } from "redux";
 
-const MyPostsContainer = () => {
-  // let store = props.store.getState().profilePage;
 
-  // const onChangeText = (text: string) => {
-  //   props.store.dispatch(updateNewPostActionCreator(text));
-  // };
 
-  // const addPost = () => {
-  //   props.store.dispatch(addPostActionCreator());
-  // };
-
-  return (
-    <StoreContext.Consumer>
-      {(store) => {
-        let state = store.getState().profilePage;
-
-        const onChangeText = (text: string) => {
-          store.dispatch(updateNewPostActionCreator(text));
-        };
-
-        const addPost = () => {
-          store.dispatch(addPostActionCreator());
-        };
-
-        return (
-          <MyPosts
-            updateNewPost={onChangeText}
-            addPost={addPost}
-            post={state.post}
-            newPostText={state.newPostText}
-          />
-        );
-      }}
-    </StoreContext.Consumer>
-  );
+type MapStateToProps = {
+  profilePage: ProfileType;
 };
+
+type MapDicpatchToPropsType = {
+  updateNewPost: (newPostText: string) => void;
+  addPost:()=>void
+};
+
+export type ProfilePagePropsType = MapStateToProps & MapDicpatchToPropsType;
+
+let mapStateToProps = (state: AppRootStateType): MapStateToProps => {
+  return {
+    profilePage: state.profilePage,
+  };
+};
+
+let mapDicpatchToProps = (dispatch: Dispatch): MapDicpatchToPropsType => {
+  return {
+    updateNewPost: (newPostText: string) => {
+      dispatch(updateNewPostActionCreator(newPostText));
+    },
+    addPost: () => {
+      dispatch(addPostActionCreator());
+    },
+  };
+};
+
+const MyPostsContainer = connect(mapStateToProps, mapDicpatchToProps)(MyPosts);
 
 export default MyPostsContainer;

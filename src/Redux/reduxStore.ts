@@ -1,6 +1,7 @@
 import { combineReducers, legacy_createStore } from "redux";
 import { dialogsReducer } from "./DialogsReducer";
 import { profileReducer } from "./ProfileReducer";
+import { v1 } from "uuid";
 
 
 const rootReducer = combineReducers({

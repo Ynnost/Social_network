@@ -2,7 +2,9 @@ import { v1 } from "uuid";
 import { AddPostActionCreator, UpdateNewPostActionCreator, profileReducer } from "./ProfileReducer";
 import { SendNewMessageBodyActionCreator, UpdateNewMessageBodyActionCreator, dialogsReducer } from "./DialogsReducer";
 
-
+export type PropsStateType = {
+  store: StoreType;
+};
 
 export type StoreType = {
   _state: StateType;
@@ -22,11 +24,10 @@ export type ProfileType = {
   newPostText: string;
 };
 
-
 export type DialogsType = {
   dialogs: DialogsItemType[];
   message: MessagesType[];
-  newMessageBoody:string;
+  newMessageBoody: string;
 };
 
 export type PostType = {
@@ -85,7 +86,7 @@ export const store: StoreType = {
         { id: v1(), message: "Yo" },
         { id: v1(), message: "What?" },
       ],
-      newMessageBoody:'',
+      newMessageBoody: "",
     },
   },
   _rernderEntireTree() {
@@ -94,14 +95,13 @@ export const store: StoreType = {
   subscribe(observer: () => void) {
     this._rernderEntireTree = observer; // observer
   },
-  getState(){
-    return this._state
+  getState() {
+    return this._state;
   },
-  dispatch(action){
-
+  dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action) as ProfileType;
     this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action) as DialogsType;
 
-   this._rernderEntireTree();
-  }
+    this._rernderEntireTree();
+  },
 };

@@ -1,6 +1,22 @@
 import { v1 } from "uuid";
 import { DispatchActionType, ProfileType } from "./store";
 
+const initialState: ProfileType = {
+  newPostText: "IT KAMASUTRA",
+  post: [
+    {
+      id: v1(),
+      message: "Hi, how are you?",
+      likesCount: 12,
+    },
+    {
+      id: v1(),
+      message: "Is`s my first post",
+      likesCount: 11,
+    },
+  ],
+};
+
 export type AddPostActionCreator = {
   type: "ADD-POST";
 };
@@ -10,10 +26,7 @@ export type UpdateNewPostActionCreator = {
   newText: string;
 };
 
-export const profileReducer = (
-  state: ProfileType,
-  action: DispatchActionType
-) => {
+export const profileReducer = (state: ProfileType = initialState, action: DispatchActionType): ProfileType => {
   switch (action.type) {
     case "ADD-POST": {
       const newPost = { id: v1(), message: state.newPostText, likesCount: 0 };
@@ -38,9 +51,7 @@ export let addPostActionCreator = (): AddPostActionCreator => {
   };
 };
 
-export let updateNewPostActionCreator = (
-  newText: string
-): UpdateNewPostActionCreator => {
+export let updateNewPostActionCreator = (newText: string): UpdateNewPostActionCreator => {
   return {
     type: "UPDATE-NEW-POST-TEXT",
     newText,

@@ -1,6 +1,24 @@
 import { v1 } from "uuid";
 import { DialogsType, DispatchActionType } from "./store";
 
+const initialState: DialogsType = {
+  dialogs: [
+    { id: v1(), name: "Denis Yunin", to: "/dialogs/1" },
+    { id: v1(), name: "Pavel Aladkin", to: "/dialogs/2" },
+    { id: v1(), name: "Micha Koldune", to: "/dialogs/3" },
+    { id: v1(), name: "Maria Shah", to: "/dialogs/4" },
+    { id: v1(), name: "Irisha Yunina", to: "/dialogs/5" },
+  ],
+  message: [
+    { id: v1(), message: "Hi" },
+    { id: v1(), message: "How are you?" },
+    { id: v1(), message: "Yo" },
+    { id: v1(), message: "Yo" },
+    { id: v1(), message: "What?" },
+  ],
+  newMessageBoody: "",
+};
+
 export type UpdateNewMessageBodyActionCreator = {
   type: "UPDATE-NEW-MESSAGE-BODY";
   newTextBoody: string;
@@ -10,10 +28,7 @@ export type SendNewMessageBodyActionCreator = {
   type: "SEND-MESSAGE";
 };
 
-export const dialogsReducer = (
-  state: DialogsType,
-  action: DispatchActionType
-) => {
+export const dialogsReducer = (state: DialogsType = initialState, action: DispatchActionType): DialogsType => {
   switch (action.type) {
     case "UPDATE-NEW-MESSAGE-BODY": {
       return {
@@ -36,18 +51,15 @@ export const dialogsReducer = (
   }
 };
 
-export let updateNewMessageBodyActionCreator = (
-  newTextBoody: string
-): UpdateNewMessageBodyActionCreator => {
+export let updateNewMessageBodyActionCreator = (newTextBoody: string): UpdateNewMessageBodyActionCreator => {
   return {
     type: "UPDATE-NEW-MESSAGE-BODY",
     newTextBoody,
   };
 };
 
-export let sendNewMessageBodyActionCreator =
-  (): SendNewMessageBodyActionCreator => {
-    return {
-      type: "SEND-MESSAGE",
-    };
+export let sendNewMessageBodyActionCreator = (): SendNewMessageBodyActionCreator => {
+  return {
+    type: "SEND-MESSAGE",
   };
+};
