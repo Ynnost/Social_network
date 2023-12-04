@@ -10,7 +10,7 @@ const NavBar = () => {
             <ul className="sub-menu">
                 <MenuItem name={'Profile'} to={'/profile'}/>
                 <MenuItem name={'Messages'} to={'/dialogs'}/>
-                <MenuItem name={'News'} to={'/news'}/>
+                <MenuItem name={'Users'} to={'/users'}/>
                 <MenuItem name={'Recipes'} to={'/recipes'}/>
                 <MenuItem name={'Setting'} to={'/setting'}/>
             </ul>

@@ -7,11 +7,9 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import { store } from "./Redux/reduxStore";
+import { store } from "./store/reduxStore";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 let rernderEntireTree = () => {
   root.render(

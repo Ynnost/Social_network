@@ -1,5 +1,5 @@
 import React from "react";
-import { store } from "./Redux/store";
+import { store } from "./store/store";
 
 const StoreContext = React.createContext(store);
 

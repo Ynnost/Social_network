@@ -1,57 +1,9 @@
 import { v1 } from "uuid";
-import { AddPostActionCreator, UpdateNewPostActionCreator, profileReducer } from "./ProfileReducer";
-import { SendNewMessageBodyActionCreator, UpdateNewMessageBodyActionCreator, dialogsReducer } from "./DialogsReducer";
+import {  profileReducer } from "./reducer/ProfileReducer";
+import {  dialogsReducer } from "./reducer/DialogsReducer";
+import { DialogsType, StoreType } from "../type";
+import { ProfileType } from "../components/Profile/ MyPost/MyPosts";
 
-export type PropsStateType = {
-  store: StoreType;
-};
-
-export type StoreType = {
-  _state: StateType;
-  subscribe: (observer: () => void) => void;
-  _rernderEntireTree: () => void;
-  getState: () => StateType;
-  dispatch: (action: DispatchActionType) => void;
-};
-
-export type StateType = {
-  profilePage: ProfileType;
-  dialogsPage: DialogsType;
-};
-
-export type ProfileType = {
-  post: PostType[];
-  newPostText: string;
-};
-
-export type DialogsType = {
-  dialogs: DialogsItemType[];
-  message: MessagesType[];
-  newMessageBoody: string;
-};
-
-export type PostType = {
-  id: string;
-  message: string;
-  likesCount: number;
-};
-
-export type DialogsItemType = {
-  id: string;
-  name: string;
-  to: string;
-};
-
-export type MessagesType = {
-  id: string;
-  message: string;
-};
-
-export type DispatchActionType =
-  | UpdateNewMessageBodyActionCreator
-  | SendNewMessageBodyActionCreator
-  | AddPostActionCreator
-  | UpdateNewPostActionCreator;
 
 export const store: StoreType = {
   _state: {

@@ -1,11 +1,8 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent } from "react";
 import s from "./MyPosts.module.css";
-import { v1 } from "uuid";
 import { Post } from "./Post/Posts";
-import { DispatchActionType, PostType } from "../../../Redux/store";
-import { addPostActionCreator, updateNewPostActionCreator } from "../../../Redux/ProfileReducer";
-import { DialogsPagePropsType } from "../../Dialogs/DialogsConteiner";
 import { ProfilePagePropsType } from "./MyPostsContainer";
+import { PostType } from "../../../type";
 
 export type ProfileType = {
   post: PostType[];
@@ -16,7 +13,7 @@ export type ProfileType = {
 
 const MyPosts = (props: ProfilePagePropsType) => {
   const renderPost = () => {
-    return props.profilePage.post.map((post) => <Post key={post.id} message={post.message} likesCount={post.likesCount} />);
+    return props.profilePage.post.map((post) => <Post key={post.id} id={post.id} message={post.message} likesCount={post.likesCount} />);
   };
 
   const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {

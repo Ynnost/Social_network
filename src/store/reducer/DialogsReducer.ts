@@ -1,5 +1,7 @@
 import { v1 } from "uuid";
-import { DialogsType, DispatchActionType } from "./store";
+import { DialogsType, DispatchActionType } from "../../type";
+
+
 
 const initialState: DialogsType = {
   dialogs: [
@@ -17,15 +19,6 @@ const initialState: DialogsType = {
     { id: v1(), message: "What?" },
   ],
   newMessageBoody: "",
-};
-
-export type UpdateNewMessageBodyActionCreator = {
-  type: "UPDATE-NEW-MESSAGE-BODY";
-  newTextBoody: string;
-};
-
-export type SendNewMessageBodyActionCreator = {
-  type: "SEND-MESSAGE";
 };
 
 export const dialogsReducer = (state: DialogsType = initialState, action: DispatchActionType): DialogsType => {
@@ -49,17 +42,4 @@ export const dialogsReducer = (state: DialogsType = initialState, action: Dispat
     default:
       return state;
   }
-};
-
-export let updateNewMessageBodyActionCreator = (newTextBoody: string): UpdateNewMessageBodyActionCreator => {
-  return {
-    type: "UPDATE-NEW-MESSAGE-BODY",
-    newTextBoody,
-  };
-};
-
-export let sendNewMessageBodyActionCreator = (): SendNewMessageBodyActionCreator => {
-  return {
-    type: "SEND-MESSAGE",
-  };
 };
