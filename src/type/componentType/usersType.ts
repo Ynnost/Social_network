@@ -1,14 +1,16 @@
 export type UsersType = {
-  users: UsersArrayType[];
+  items: UsersAPIType[];
 };
 
-export type UsersArrayType = {
-  id: string;
-  followed: boolean;
-  fullName: string;
-  status: string;
-  location: {
-    citi: string;
-    country: string;
+export type UsersAPIType = {
+  name: string;
+  id: number;
+  uniqueUrlName: string;
+  photos: {
+    small: string;
+    large: string;
   };
+  status: string;
+  followed: boolean;
 };
+

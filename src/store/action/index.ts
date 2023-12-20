@@ -2,4 +2,4 @@ export { updateNewMessageBodyActionCreator, sendNewMessageBodyActionCreator } fr
 
 export { addPostActionCreator, updateNewPostActionCreator } from "./ProfileAction";
 
-export { followAC, unfollowAC } from "./UsersAction";
+export { followAC, unfollowAC, setUsersAC } from "./UsersAction";

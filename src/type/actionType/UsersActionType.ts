@@ -1,9 +1,9 @@
 export type FollowAC = {
   type: "FOLLOW";
-  userID: string;
+  userID: number;
 };
 
 export type UnfollowAC = {
   type: "UNFOLLOW";
-  userID: string;
+  userID: number;
 };

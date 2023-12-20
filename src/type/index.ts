@@ -1,3 +1,4 @@
+import { SetUsersAC } from "../store/action/UsersAction";
 import {
   AddPostActionCreator,
   FollowAC,
@@ -13,7 +14,7 @@ export type { ProfileType, PostType } from "./componentType/profileType";
 
 export type { PropsStateType, StoreType, StateType } from "./state";
 
-export type { UsersType } from "./componentType/usersType";
+export type { UsersType, UsersAPIType } from "./componentType/usersType";
 
 export type DispatchActionType =
   | UpdateNewMessageBodyActionCreator
@@ -21,4 +22,5 @@ export type DispatchActionType =
   | AddPostActionCreator
   | UpdateNewPostActionCreator
   | FollowAC
-  | UnfollowAC;
+  | UnfollowAC
+  | SetUsersAC;
